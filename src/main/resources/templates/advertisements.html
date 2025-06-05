@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Ogłoszeń</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .add-button { display: inline-block; padding: 10px 15px; background-color: #28a745; color: white; border-radius: 5px; margin-bottom: 20px; }
+        .ad-item { margin-bottom: 15px; padding: 10px; border: 1px solid #eee; border-radius: 5px; background-color: #fafafa; }
+        .ad-title { font-weight: bold; color: #0056b3; }
+        .ad-price { font-size: 1.1em; color: #e44d26; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Dostępne Ogłoszenia</h1>
+
+    <a href="/add" class="add-button">Dodaj nowe ogłoszenie</a>
+
+    <div th:if="${advertisements.empty}">
+        <p>Obecnie brak ogłoszeń.</p>
+    </div>
+    <div th:unless="${advertisements.empty}">
+        <table>
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Miasto</th>
+                <th>Cena</th>
+                <th>Liczba pokoi</th>
+                <th>Powierzchnia</th>
+                <th>Kontakt</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ad : ${advertisements}">
+                <td class="ad-title"><a th:href="@{/advertisements/{id}(id=${ad.id})}" th:text="${ad.title}">nazwa Ogłoszenia</a></td>
+                <td th:text="${ad.city}">Miasto</td>
+                <td th:text="${ad.price} + ' zł'">1000000 zł</td> <td th:text="${ad.rooms}">3</td>
+                <td th:text="${ad.area} + ' m²'">75 m²</td>
+                <td th:text="${ad.contactPhone}">+48XXXXXXXXX</td> </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

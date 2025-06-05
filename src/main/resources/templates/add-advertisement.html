@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Ogłoszenie</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        form div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input[type="text"], input[type="number"], textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        textarea { resize: vertical; min-height: 80px; }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Dodaj nowe ogłoszenie</h1>
+
+    <form th:action="@{/add}" th:object="${advertisement}" method="post">
+        <div>
+            <label for="title">Tytuł:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+        </div>
+        <div>
+            <label for="description">Opis:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
+        <div>
+            <label for="price">Cena (zł):</label>
+            <input type="number" id="price" th:field="*{price}" step="0.01" required />
+        </div>
+        <div>
+            <label for="city">Miasto:</label>
+            <input type="text" id="city" th:field="*{city}" required />
+        </div>
+        <div>
+            <label for="address">Adres:</label>
+            <input type="text" id="address" th:field="*{address}" />
+        </div>
+        <div>
+            <label for="rooms">Liczba pokoi:</label>
+            <input type="number" id="rooms" th:field="*{rooms}" />
+        </div>
+        <div>
+            <label for="area">Powierzchnia (m²):</label>
+            <input type="number" id="area" th:field="*{area}" step="0.01" />
+        </div>
+        <div>
+            <label for="imageUrl">Adres URL zdjęcia:</label>
+            <input type="text" id="imageUrl" th:field="*{imageUrl}" />
+        </div>
+        <div>
+            <label for="contactPhone">Telefon kontaktowy:</label>
+            <input type="text" id="contactPhone" th:field="*{contactPhone}" required />
+        </div>
+        <div>
+            <button type="submit">Dodaj ogłoszenie</button>
+        </div>
+    </form>
+    <p><a href="/">Powrót do listy</a></p>
+</div>
+</body>
+</html>
